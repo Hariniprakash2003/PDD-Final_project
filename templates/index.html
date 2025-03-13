@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDD - Login </title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+ 
+</head>
+<body>
+  <div class="container">
+        <h1 class="h1">Parkinson's Disease Detector</h1>   
+    <div class="form-wrapper">
+      <h3>Login</h3>
+      <form action="{{ url_for('check_db.details') }}" method="POST">
+        <div>
+          <label for="login-email">Email:</label>
+          <input type="email" id="login-email" name="email" required>
+        </div>
+        <div>
+          <label for="login-password">Password:</label>
+          <input type="password" id="login-password" name="password" required>
+        </div>
+        <button type="submit" class="log-btn">Login</button>
+      </form>
+      <p>Don't have an account? <a id="signup-link" href="/signup" >Signup</a></p>
+    </div>
+    
+    </div>
+  </body>
+</html>

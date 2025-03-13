@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">PDD - Upload</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <script>
+        var selectedFiles = [];
+        var currentImageIndex = 0;
+        var maxFileSize = 2048 * 2048;
+
+        function showPreview(event) {
+            var fileInput = event.target;
+            var files = fileInput.files;
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                // Validate file size
+                if (file.size > maxFileSize) {
+                    alert("File size exceeds the maximum limit");
+                    continue; // Skip this file
+                }
+                selectedFiles.push(file);
+            }
+
+            currentImageIndex = selectedFiles.length - 1;
+            displayCurrentImage();
+        }
+
+        function displayCurrentImage() {
+            var previewContainer = document.getElementById("preview-container");
+            previewContainer.innerHTML = "";
+
+            if (selectedFiles.length === 0) {
+                return;
+            }
+
+            
+            var currentFile = selectedFiles[currentImageIndex];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var previewImageContainer = document.createElement("div");
+                previewImageContainer.setAttribute("class", "preview-image-container");
+
+                var previewImage = document.createElement("img");
+                previewImage.setAttribute("src", e.target.result);
+                previewImage.setAttribute("class", "preview-image");
+
+                var prevButton = document.createElement("button");
+                prevButton.setAttribute("class", "navigation-btn prev-btn");
+                prevButton.innerHTML = "&lt;";
+                prevButton.onclick = function () {
+                    navigateImages(-1);
+                };
+
+                var nextButton = document.createElement("button");
+                nextButton.setAttribute("class", "navigation-btn next-btn");
+                nextButton.innerHTML = "&gt;";
+                nextButton.onclick = function () {
+                    navigateImages(1);
+                };
+
+                previewImageContainer.appendChild(previewImage);
+                previewImageContainer.appendChild(prevButton);
+                previewImageContainer.appendChild(nextButton);
+                previewContainer.appendChild(previewImageContainer);
+            };
+
+            reader.readAsDataURL(currentFile);
+            
+        }
+
+        
+       function navigateImages(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex < 0) {
+                currentImageIndex = selectedFiles.length - 1;
+            } else if (currentImageIndex >= selectedFiles.length) {
+                currentImageIndex = 0;
+            }
+
+            displayCurrentImage();
+        }
+        
+    </script>
+</head>
+<body>
+    <div class="upload">
+        <h1>Upload Spiral Image</h1>
+
+        <form action="{{ url_for('submit_image.check') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" multiple onchange="showPreview(event)">
+            <input type="submit" value="Upload">
+            <input type="hidden" name="email" value="{{ email }}">
+        </form>
+
+    <div id="preview-container"></div>
+    </div>
+    <br><br>
+    <div class="footer">
+        <p>Go to <a href="/details">previous</a> page .</p>
+    </div>
+    <script>
+        // Set the default preview when the page loads
+        displayCurrentImage();
+    </script>
+</body>
+</html>

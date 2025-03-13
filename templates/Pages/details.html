@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title id="title">PDD - Details</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <script src="{{url_for('static', filename='Javascript/index.js')}}"></script>
+   
+</head>
+<body>
+    <h1>Patient details</h1>
+    <div class="form-container">
+        <form id="myForm" action = "{{ url_for('submit_details.upload') }}" method="POST" onsubmit="return validateForm()">
+            <div class="form_fields">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <br />
+
+            <div class="form_fields">
+                <label>Gender </label>
+                <input type="radio" id="male" name="gender" value="male" required>Male
+
+                <input type="radio" id="female" name="gender" value="female" required>Female
+
+                <input type="radio" id="other" name="gender" value="other" required>Other
+            </div>
+
+            <br />
+
+            <div class="form_fields">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required>
+
+            </div>
+
+            <br />
+
+            <div class="form_fields">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <br />
+
+            <div class="form_fields">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <br />
+
+            <!--
+                <div id="upload">
+                Upload Test Image Here<br />
+                     <input type="file" name="imageUpload" accept="image/*" />
+                </div>
+            -->
+
+            <div class="form_fields">
+                <button type="submit" name="submit">
+                    <!--onclick="window.location.href = 'upload.html';"-->
+                    <span id="span1">Proceed to upload test images</span>
+                </button>
+            </div>
+
+            <br /><br />
+        </form>
+    </div>
+</body>
+</html>

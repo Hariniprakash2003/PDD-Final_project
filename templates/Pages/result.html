@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title id="title">PDD - Info</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <script src="{{url_for('static', filename='Javascript/index.js')}}"></script>
+    <style>
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 500px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        td {
+            padding: 10px;
+            text-align: center;
+            border: #000000;
+            color: #000000;
+        }
+        th {
+            padding: 20px;
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+        }
+        td {
+            border-bottom: 1px solid #ccc;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Patient Information</h1>
+    <table>
+        {% for row in data %}
+        <tr>
+            <th>Name</th>
+            <td>{{ row[1] }}</td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td>{{ row[2] }}</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>{{ row[3] }}</td>
+        </tr>
+        <tr>
+            <th>Disease Result</th>
+            <td style="background-color: #ff7f50; color: #fff;">{{ row[6] }}</td>
+        </tr>
+        <tr>
+            <th>Prediction Confidence </th>
+            <td style="background-color: #ff7f50; color: #fff;">{{ res }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <div class="footer">
+        <p>Go to <a href="/">Login </a> page .</p>
+    </div>
+
+</body>
+</html>

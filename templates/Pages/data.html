@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title id="title">PDD - Details</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <script src="{{url_for('static', filename='Javascript/index.js')}}"></script>
+    <style>
+        table {
+            width: 100%; /* Make the table take up 100% of the width */
+            border-collapse: collapse; /* Collapse table borders */
+            background-color: #ffffff; /* Set the background color of the table to white */
+        }
+
+        th { 
+            border-right: 1px solid #ffffff; /* Add a border to table cells */
+            padding: 8px; /* Add some padding for cell content */
+            text-align: center;
+            background-color: #000000; /* Set a light gray background for table headers */
+            color: #ffffff; /* Align text to the left */
+        }
+
+        td {
+            border: 1px solid #000000; /* Add a border to table cells */
+            padding: 8px; /* Add some padding for cell content */
+            text-align: center;
+            background-color: #ffffff;
+            color: #000000 ;
+        }
+    </style>
+   
+</head>
+<body>
+    <div class="data">
+        <h1>Patient data</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>E-mail</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <td>{{ row[6] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>Go to <a href="/">Login </a> page .</p>
+    </div>
+    
+</body>
